@@ -29,6 +29,7 @@ window.addEventListener('keydown', playSound);
 
 // click keys for sound 
 
+
 background.addEventListener('click', (e) => {
 	if (e.target.className === "key") {
 		const key = e.target;
@@ -42,7 +43,17 @@ background.addEventListener('click', (e) => {
 				background.classList.add('bg-playing');
 			}
 		}
+	} else if (e.target.parentElement.className == "key") {
+		const key = e.target.parentElement;
+		const keyNum = key.getAttribute('data-key');
+		const sound = document.querySelectorAll('audio');
+		for ( let i=0; i < sound.length; i++ ) {
+			let curSound = sound[i];
+			if ( curSound.getAttribute('data-key') === keyNum ) {
+				curSound.play();
+				key.classList.add('playing');
+				background.classList.add('bg-playing');
+			}
+		}
 	}
 });
-
-
